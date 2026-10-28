@@ -1,9 +1,0 @@
-torch --index-url https://download.pytorch.org/whl/cpu
-diffusers
-transformers
-accelerate
-trimesh
-rembg
-tsr
-git+https://github.com/openai/shap-e.git
-ipywidgets
