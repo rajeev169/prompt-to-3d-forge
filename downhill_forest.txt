@@ -1,0 +1,16 @@
+# name | preset | prompt     (lines starting with # are ignored)
+pine_tree        | tree  | tall pine tree, dark green needles, rough bark
+birch_tree       | tree  | birch tree with white bark and light green leaves
+boulder_mossy    | rock  | large mossy granite boulder
+rock_small       | rock  | small flat river stone, grey
+rock_cluster     | rock  | cluster of sharp mountain rocks with dirt
+fallen_log       | prop  | fallen rotting tree log covered in moss
+tree_stump       | prop  | cut tree stump with visible rings and roots
+wooden_ramp      | prop  | wooden mountain bike jump ramp made of planks
+wooden_bridge    | prop  | short wooden plank bridge with rails
+trail_sign       | prop  | wooden trail marker signpost with arrow
+wooden_fence     | prop  | rustic wooden fence section
+fern_plant       | plant | forest fern plant
+bush_green       | plant | dense green forest bush
+mushroom_cluster | plant | cluster of brown forest mushrooms
+mtb_helmet       | prop  | mountain bike helmet, matte black
