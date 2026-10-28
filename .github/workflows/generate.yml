@@ -9,8 +9,7 @@ on:
         type: choice
         options:
         - TripoSR - Best free quality, 4min
-        - Shap-E - Fastest, unlimited, 3min  
-        - Luma Genie - Highest quality, needs API key
+        - Shap-E - Fastest, unlimited, 3min
       prompt:
         description: 'Describe your game asset'
         required: true
@@ -41,10 +40,7 @@ jobs:
           
       - name: Install dependencies
         run: |
-          pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
-          pip install diffusers transformers accelerate trimesh rembg
-          pip install git+https://github.com/openai/shap-e.git
-          pip install git+https://github.com/VAST-AI-Research/TripoSR.git
+          pip install -r requirements.txt
           
       - name: Generate with ${{ github.event.inputs.model_choice }}
         run: |
