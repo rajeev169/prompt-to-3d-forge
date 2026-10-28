@@ -24,6 +24,9 @@ pip install -r /tmp/triposr-req.txt
 pip install scikit-build-core cmake ninja pybind11 setuptools wheel
 pip install --no-build-isolation git+https://github.com/tatsy/torchmcubes.git
 
+# TripoSR's own requirements can pull newer versions; re-pin the ones that must match.
+pip install "transformers==4.35.0" "numpy<2" "huggingface-hub<1.0"
+
 if [ "${FORGE_SHAPE:-0}" = "1" ]; then
   pip install git+https://github.com/openai/shap-e.git
 fi
