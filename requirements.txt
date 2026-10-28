@@ -1,0 +1,8 @@
+torch --index-url https://download.pytorch.org/whl/cpu
+diffusers
+transformers
+accelerate
+trimesh
+rembg
+git+https://github.com/openai/shap-e.git
+git+https://github.com/VAST-AI-Research/TripoSR.git
