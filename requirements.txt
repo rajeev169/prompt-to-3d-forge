@@ -1,0 +1,15 @@
+# torch is installed by setup.sh (CPU or CUDA build)
+# transformers is pinned: newer versions rename ViT layers and TripoSR's weights fail to load.
+numpy<2
+scipy
+Pillow
+trimesh>=4.4
+fast-simplification
+xatlas
+diffusers==0.30.3
+transformers==4.35.0
+accelerate
+safetensors
+huggingface-hub<1.0
+rembg
+onnxruntime
