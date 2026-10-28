@@ -1,0 +1,14 @@
+# torch is installed by setup.sh (CPU or CUDA build)
+numpy
+scipy
+Pillow
+trimesh>=4.4
+fast-simplification
+xatlas
+diffusers
+transformers
+accelerate
+safetensors
+huggingface-hub
+rembg
+onnxruntime
