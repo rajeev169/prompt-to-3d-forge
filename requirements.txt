@@ -4,5 +4,5 @@ transformers
 accelerate
 trimesh
 rembg
-git+https://github.com/openai/shap-e.git
+tsr
 git+https://github.com/VAST-AI-Research/TripoSR.git
