@@ -1,0 +1,87 @@
+name: Generate 3D Game Assets
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: Single asset, or the whole batch list
+        type: choice
+        default: single
+        options: [single, batch]
+      name:
+        description: Asset name (single mode)
+        default: boulder_mossy
+      prompt:
+        description: Describe the asset (single mode)
+        default: large mossy granite boulder
+      preset:
+        description: Asset type (single mode)
+        type: choice
+        default: rock
+        options: [prop, rock, tree, plant, character, vehicle, building]
+      backend:
+        description: AI backend
+        type: choice
+        default: triposr
+        options: [triposr, shap-e]
+      resolution:
+        description: Mesh grid resolution (256 for CPU runners)
+        default: "256"
+      tex_size:
+        description: Texture size in pixels
+        default: "1024"
+      batch_file:
+        description: Batch list file (batch mode)
+        default: assets/downhill_forest.txt
+
+jobs:
+  generate:
+    # Set a repo variable RUNNER to your self-hosted GPU runner label for faster, denser results.
+    runs-on: ${{ vars.RUNNER || 'ubuntu-latest' }}
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+          cache: pip
+
+      - name: System packages
+        run: sudo apt-get update && sudo apt-get install -y cmake build-essential libgl1 libglib2.0-0
+
+      - name: Cache model weights
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/huggingface
+          key: hf-models-v1
+
+      - name: Install
+        env:
+          FORGE_SHAPE: ${{ inputs.backend == 'shap-e' && '1' || '0' }}
+        run: bash setup.sh
+
+      - name: Generate
+        env:
+          MODE: ${{ inputs.mode }}
+          NAME: ${{ inputs.name }}
+          PROMPT: ${{ inputs.prompt }}
+          PRESET: ${{ inputs.preset }}
+          BACKEND: ${{ inputs.backend }}
+          RESOLUTION: ${{ inputs.resolution }}
+          TEX_SIZE: ${{ inputs.tex_size }}
+          BATCH_FILE: ${{ inputs.batch_file }}
+        run: |
+          if [ "$MODE" = "batch" ]; then
+            python generate.py --batch "$BATCH_FILE" --backend "$BACKEND" \
+              --resolution "$RESOLUTION" --tex-size "$TEX_SIZE"
+          else
+            python generate.py --name "$NAME" --prompt "$PROMPT" --preset "$PRESET" \
+              --backend "$BACKEND" --resolution "$RESOLUTION" --tex-size "$TEX_SIZE"
+          fi
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: game-assets-${{ github.run_number }}
+          path: outputs/
+          retention-days: 14
